@@ -1,0 +1,48 @@
+logs
+*.log
+backups/
+guests-export.csv
+public/images/**
+!public/images/
+!public/images/A Divine Encounter/
+!public/images/A Divine Encounter/Encouter1.jpeg
+!public/images/A Divine Encounter/Encouter2.jpeg
+!public/images/A Divine Encounter/Encouter3.jpeg
+!public/images/A Divine Encounter/WhatsApp Image 2026-04-12 at 11.18.34 PM (1).jpeg
+!public/images/A Divine Encounter/Convenant2.jpeg
+!public/images/A Divine Encounter/Convenant3.jpeg
+!public/images/Love Takes Root/
+!public/images/Love Takes Root/Love1.jpeg
+!public/images/Love Takes Root/Love2.jpeg
+!public/images/Love Takes Root/Love3.jpeg
+!public/images/Dowry Presentation/
+!public/images/Dowry Presentation/WhatsApp Image 2026-04-14 at 11.40.09 AM.jpeg
+!public/images/Dowry Presentation/WhatsApp Image 2026-04-14 at 11.40.11 AM.jpeg
+!public/images/Dowry Presentation/WhatsApp Image 2026-04-14 at 11.40.05 AM.jpeg
+!public/images/Dowry Presentation/WhatsApp Image 2026-04-14 at 11.40.12 AM.jpeg
+!public/images/Dowry Presentation/WhatsApp Image 2026-04-14 at 11.40.08 AM.jpeg
+!public/images/Dowry Presentation/WhatsApp Image 2026-04-14 at 11.40.10 AM.jpeg
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.env
+.env.*
+!.env.example
+supabase/.temp/

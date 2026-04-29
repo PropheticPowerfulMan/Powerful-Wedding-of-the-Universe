@@ -1,0 +1,197 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  section[id] {
+    scroll-margin-top: 72px;
+  }
+
+  body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #D4AF37;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #F0C040;
+  }
+}
+
+@layer utilities {
+  .vision-card.vision-visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(300px) rotate(720deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-fade-in {
+  animation: fade-in 1.2s ease forwards;
+}
+
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    #D4AF37 0%,
+    #F0C040 25%,
+    #fff 50%,
+    #F0C040 75%,
+    #D4AF37 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+
+  body {
+    background: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  body > * {
+    display: none !important;
+  }
+
+  #invitation-modal {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    inset: auto !important;
+    padding: 0 !important;
+    background: white !important;
+    backdrop-filter: none !important;
+    z-index: 9999 !important;
+  }
+
+  #invitation-modal > div:first-child {
+    display: none !important;
+  }
+
+  #invitation-modal button {
+    display: none !important;
+  }
+
+  #invitation-card {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 40px !important;
+    background: #060E1C !important;
+    border: 3px solid #D4AF37 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    page-break-after: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  #invitation-card > div {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  #invitation-card .absolute {
+    position: static !important;
+    display: none !important;
+  }
+
+  #invitation-card .relative.z-10 {
+    position: static !important;
+    max-width: 100% !important;
+  }
+
+  #invitation-card * {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    visibility: visible !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  #invitation-card .max-w-md {
+    max-width: 100% !important;
+  }
+
+  #invitation-card .max-w-xs {
+    max-width: 100% !important;
+  }
+
+  #invitation-card div[style*="boxShadow"] {
+    box-shadow: none !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+}
