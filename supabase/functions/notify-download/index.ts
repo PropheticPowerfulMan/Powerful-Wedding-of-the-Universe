@@ -181,7 +181,7 @@ Deno.serve(async (req) => {
       `Downloads: ${results.downloadCount}`,
     ].join(' | ');
 
-    const hostEmailSubject = `Invitation téléchargée — ${invitationLabel}`;
+    const hostEmailSubject = `Invitation téléchargée, ${invitationLabel}`;
     const hostEmailText = [
       '✨ Bonne nouvelle!',
       '',
@@ -194,7 +194,7 @@ Deno.serve(async (req) => {
       `Email connu: ${contactEmail}`,
       `Nombre de téléchargements: ${results.downloadCount}`,
       '',
-      '— Système de gestion du mariage prophétique',
+      ', Système de gestion du mariage prophétique',
     ].join('\n');
 
     const siteUrl = Deno.env.get('PUBLIC_SITE_URL') ?? 'https://powerfulweddingoftheuniverse.netlify.app/';
@@ -203,10 +203,10 @@ Deno.serve(async (req) => {
       'Merci de la conserver precieusement comme invitation officielle.',
       'Si ce n est pas encore fait, confirmez votre presence sur le site:',
       siteUrl,
-      'Jonathan & Maria - 26 juin 2026.',
+      'Jonathan & Maria, 26 juin 2026.',
     ].join(' ');
 
-    const guestEmailSubject = 'Official Wedding Invitation - Jonathan & Maria';
+    const guestEmailSubject = 'Official Wedding Invitation, Jonathan & Maria';
     const guestEmailText = [
       '══════════════════════════════════════════════════════════════════',
       '                     OFFICIAL WEDDING INVITATION',
@@ -218,7 +218,7 @@ Deno.serve(async (req) => {
       "C'est avec une joie profonde, un cœur rempli de gratitude et une âme animée par la foi que nous avons",
       "l'immense honneur de vous convier à la célébration de notre union sacrée.",
       '',
-      'Ce mariage n\'est pas simplement un événement — c\'est une rencontre prophétique, ordonnée par Dieu,',
+      'Ce mariage n\'est pas simplement un événement, c\'est une rencontre prophétique, ordonnée par Dieu,',
       'scellée dans l\'éternité, et célébrée avec grandeur devant notre famille, nos amis et nos bien-aimés.',
       '',
       'Votre présence à nos côtés est pour nous un cadeau inestimable. Vous êtes choisi(e) parmi les nôtres',
@@ -231,22 +231,22 @@ Deno.serve(async (req) => {
       '  MARIAGE CIVIL',
       '  Date    : Vendredi 29 mai 2026',
       '  Heure   : 9h00',
-      '  Lieu    : Commune de la Gombe — Kinshasa, République Démocratique du Congo',
+      '  Lieu    : Commune de la Gombe, Kinshasa, République Démocratique du Congo',
       '',
       '  MARIAGE TRADITIONNEL (DOT)',
       '  Date    : Vendredi 26 juin 2026',
       '  Heure   : 9h00',
-      '  Lieu    : À confirmer — Kinshasa, République Démocratique du Congo',
+      '  Lieu    : À confirmer, Kinshasa, République Démocratique du Congo',
       '',
       '  CÉRÉMONIE RELIGIEUSE',
       '  Date    : Vendredi 26 juin 2026',
       '  Heure   : 16h00',
-      '  Lieu    : À confirmer — Kinshasa, République Démocratique du Congo',
+      '  Lieu    : À confirmer, Kinshasa, République Démocratique du Congo',
       '',
       '  SOIRÉE DE RÉCEPTION & CÉLÉBRATION',
       '  Date    : Vendredi 26 juin 2026',
       '  Heure   : 21h00',
-      '  Lieu    : À confirmer — Kinshasa, République Démocratique du Congo',
+      '  Lieu    : À confirmer, Kinshasa, République Démocratique du Congo',
       '',
       '──────────────────────────────────────────────────────────────────',
       '                        INFORMATIONS PRATIQUES',
@@ -262,7 +262,7 @@ Deno.serve(async (req) => {
       '',
       '  Votre invitation numérique :',
       '  Vous venez de télécharger votre invitation personnelle. Nous vous remercions.',
-      '  Veuillez la conserver précieusement — elle attestera de votre invitation personnelle.',
+      '  Veuillez la conserver précieusement, elle attestera de votre invitation personnelle.',
       '',
       '══════════════════════════════════════════════════════════════════',
       '                          ENGLISH VERSION',
@@ -273,7 +273,7 @@ Deno.serve(async (req) => {
       'It is with deep joy, a heart full of gratitude and a soul moved by faith that we have the immense',
       'honor of inviting you to the celebration of our sacred union.',
       '',
-      'This wedding is not merely an event — it is a prophetic encounter, ordained by God, sealed in eternity,',
+      'This wedding is not merely an event, it is a prophetic encounter, ordained by God, sealed in eternity,',
       'and celebrated with grandeur before our family, our friends and our beloved ones.',
       '',
       'Your presence at our side is an invaluable gift to us. You are chosen among ours to share this',
@@ -286,31 +286,31 @@ Deno.serve(async (req) => {
       '  CIVIL WEDDING CEREMONY',
       '  Date  : Friday, May 29, 2026',
       '  Time  : 9:00 AM',
-      '  Venue : Commune de la Gombe — Kinshasa, Democratic Republic of Congo',
+      '  Venue : Commune de la Gombe, Kinshasa, Democratic Republic of Congo',
       '',
       '  TRADITIONAL WEDDING CEREMONY (DOT)',
       '  Date  : Friday, June 26, 2026',
       '  Time  : 9:00 AM',
-      '  Venue : To be confirmed — Kinshasa, Democratic Republic of Congo',
+      '  Venue : To be confirmed, Kinshasa, Democratic Republic of Congo',
       '',
       '  RELIGIOUS CEREMONY',
       '  Date  : Friday, June 26, 2026',
       '  Time  : 4:00 PM',
-      '  Venue : To be confirmed — Kinshasa, Democratic Republic of Congo',
+      '  Venue : To be confirmed, Kinshasa, Democratic Republic of Congo',
       '',
       '  RECEPTION & CELEBRATION EVENING',
       '  Date  : Friday, June 26, 2026',
       '  Time  : 9:00 PM',
-      '  Venue : To be confirmed — Kinshasa, Democratic Republic of Congo',
+      '  Venue : To be confirmed, Kinshasa, Democratic Republic of Congo',
       '',
       '──────────────────────────────────────────────────────────────────',
       '                         PRACTICAL INFORMATION',
       '──────────────────────────────────────────────────────────────────',
       '',
-      '  RSVP — Kindly confirm your attendance as soon as possible via our official website.',
+      '  RSVP, Kindly confirm your attendance as soon as possible via our official website.',
       '  Official website : https://powerfulweddingoftheuniverse.netlify.app/',
       '',
-      '  Dress Code : Elegant ceremony attire — formal African or European dress.',
+      '  Dress Code : Elegant ceremony attire, formal African or European dress.',
       '',
       '  Your personal invitation has been successfully downloaded.',
       '  Please keep it as your official entry document.',
@@ -320,9 +320,9 @@ Deno.serve(async (req) => {
       '              Avec tout notre amour et notre reconnaissance,',
       '                  With all our love and our gratitude,',
       '',
-      '                        Jonathan Lokala — Lomboto',
+      '                        Jonathan Lokala, Lomboto',
       '                                  &',
-      '                       Maria Nzitusu — Mvibudulu',
+      '                       Maria Nzitusu, Mvibudulu',
       '',
       '                 Site officiel / Official website :',
       '         https://powerfulweddingoftheuniverse.netlify.app/',
@@ -338,7 +338,7 @@ Deno.serve(async (req) => {
     const bg = '#060E1C';
     const guestEmailHtml = `<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Official Invitation - Jonathan &amp; Maria</title></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Official Invitation, Jonathan &amp; Maria</title></head>
 <body style="margin:0;padding:0;background:${bg};font-family:Georgia,'Times New Roman',serif;">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:${bg};padding:32px 0;">
   <tr><td align="center">
@@ -353,9 +353,9 @@ Deno.serve(async (req) => {
       <tr><td style="background:linear-gradient(135deg,#0A1628 0%,#1a2a4a 100%);padding:36px 40px 24px;text-align:center;border-bottom:1px solid ${gold}40;">
         <p style="margin:0 0 6px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:${gold};font-family:Arial,sans-serif;">OFFICIAL WEDDING INVITATION</p>
         <h1 style="margin:0;font-size:28px;color:#ffffff;font-weight:normal;line-height:1.3;">Wedding Celebration of</h1>
-        <h2 style="margin:8px 0 0;font-size:22px;color:${gold};font-weight:normal;">Jonathan Lokala — Lomboto</h2>
+        <h2 style="margin:8px 0 0;font-size:22px;color:${gold};font-weight:normal;">Jonathan Lokala, Lomboto</h2>
         <p style="margin:6px 0;font-size:18px;color:#ffffff;">&amp;</p>
-        <h2 style="margin:0;font-size:22px;color:${gold};font-weight:normal;">Maria Nzitusu — Mvibudulu</h2>
+        <h2 style="margin:0;font-size:22px;color:${gold};font-weight:normal;">Maria Nzitusu, Mvibudulu</h2>
       </td></tr>
 
       <!-- Salutation -->
@@ -365,7 +365,7 @@ Deno.serve(async (req) => {
           C'est avec une joie profonde, un cœur rempli de gratitude et une âme animée par la foi que nous avons l'immense honneur de vous convier à la célébration de notre union sacrée.
         </p>
         <p style="margin:14px 0 0;font-size:15px;color:#cccccc;line-height:1.8;">
-          Ce mariage n'est pas simplement un événement — c'est une <em>rencontre prophétique</em>, ordonnée par Dieu, scellée dans l'éternité, et célébrée avec grandeur devant notre famille, nos amis et nos bien-aimés.
+          Ce mariage n'est pas simplement un événement, c'est une <em>rencontre prophétique</em>, ordonnée par Dieu, scellée dans l'éternité, et célébrée avec grandeur devant notre famille, nos amis et nos bien-aimés.
         </p>
         <p style="margin:14px 0 0;font-size:15px;color:#cccccc;line-height:1.8;">
           Votre présence à nos côtés est un cadeau inestimable. Vous êtes choisi(e) parmi les nôtres pour partager ce moment solennel et inoubliable.
@@ -381,19 +381,19 @@ Deno.serve(async (req) => {
         <table width="100%" cellpadding="0" cellspacing="0">
           <tr>
             <td style="padding:10px 0;border-bottom:1px solid #1e3050;vertical-align:top;width:42%;color:${gold};font-size:13px;font-family:Arial,sans-serif;letter-spacing:0.5px;">MARIAGE CIVIL</td>
-            <td style="padding:10px 0 10px 16px;border-bottom:1px solid #1e3050;vertical-align:top;color:#ffffff;font-size:14px;">Vendredi 29 mai 2026 &nbsp;·&nbsp; 9h00<br><span style="color:#888;font-size:12px;">Commune de la Gombe — Kinshasa, RDC</span></td>
+            <td style="padding:10px 0 10px 16px;border-bottom:1px solid #1e3050;vertical-align:top;color:#ffffff;font-size:14px;">Vendredi 29 mai 2026 &nbsp;·&nbsp; 9h00<br><span style="color:#888;font-size:12px;">Commune de la Gombe, Kinshasa, RDC</span></td>
           </tr>
           <tr>
             <td style="padding:10px 0;border-bottom:1px solid #1e3050;vertical-align:top;color:${gold};font-size:13px;font-family:Arial,sans-serif;letter-spacing:0.5px;">MARIAGE TRADITIONNEL</td>
-            <td style="padding:10px 0 10px 16px;border-bottom:1px solid #1e3050;vertical-align:top;color:#ffffff;font-size:14px;">Vendredi 26 juin 2026 &nbsp;·&nbsp; 9h00<br><span style="color:#888;font-size:12px;">Lieu à confirmer — Kinshasa, RDC</span></td>
+            <td style="padding:10px 0 10px 16px;border-bottom:1px solid #1e3050;vertical-align:top;color:#ffffff;font-size:14px;">Vendredi 26 juin 2026 &nbsp;·&nbsp; 9h00<br><span style="color:#888;font-size:12px;">Lieu à confirmer, Kinshasa, RDC</span></td>
           </tr>
           <tr>
             <td style="padding:10px 0;border-bottom:1px solid #1e3050;vertical-align:top;color:${gold};font-size:13px;font-family:Arial,sans-serif;letter-spacing:0.5px;">CÉRÉMONIE RELIGIEUSE</td>
-            <td style="padding:10px 0 10px 16px;border-bottom:1px solid #1e3050;vertical-align:top;color:#ffffff;font-size:14px;">Vendredi 26 juin 2026 &nbsp;·&nbsp; 16h00<br><span style="color:#888;font-size:12px;">Lieu à confirmer — Kinshasa, RDC</span></td>
+            <td style="padding:10px 0 10px 16px;border-bottom:1px solid #1e3050;vertical-align:top;color:#ffffff;font-size:14px;">Vendredi 26 juin 2026 &nbsp;·&nbsp; 16h00<br><span style="color:#888;font-size:12px;">Lieu à confirmer, Kinshasa, RDC</span></td>
           </tr>
           <tr>
             <td style="padding:10px 0;vertical-align:top;color:${gold};font-size:13px;font-family:Arial,sans-serif;letter-spacing:0.5px;">RÉCEPTION &amp; CÉLÉBRATION</td>
-            <td style="padding:10px 0 10px 16px;vertical-align:top;color:#ffffff;font-size:14px;">Vendredi 26 juin 2026 &nbsp;·&nbsp; 21h00<br><span style="color:#888;font-size:12px;">Lieu à confirmer — Kinshasa, RDC</span></td>
+            <td style="padding:10px 0 10px 16px;vertical-align:top;color:#ffffff;font-size:14px;">Vendredi 26 juin 2026 &nbsp;·&nbsp; 21h00<br><span style="color:#888;font-size:12px;">Lieu à confirmer, Kinshasa, RDC</span></td>
           </tr>
         </table>
       </td></tr>
@@ -411,11 +411,11 @@ Deno.serve(async (req) => {
         </p>
         <p style="margin:0 0 10px;font-size:14px;color:#cccccc;line-height:1.7;">
           <strong style="color:#ffffff;">Tenue vestimentaire :</strong><br>
-          Tenue de cérémonie formelle — africaine ou européenne élégante.
+          Tenue de cérémonie formelle, africaine ou européenne élégante.
         </p>
         <p style="margin:0;font-size:14px;color:#cccccc;line-height:1.7;">
           <strong style="color:#ffffff;">Votre invitation numérique :</strong><br>
-          Vous venez de télécharger votre invitation personnelle. Veuillez la conserver précieusement — elle attestera de votre convocation officielle.
+          Vous venez de télécharger votre invitation personnelle. Veuillez la conserver précieusement, elle attestera de votre convocation officielle.
         </p>
       </td></tr>
 
@@ -430,14 +430,14 @@ Deno.serve(async (req) => {
           It is with deep joy, a heart full of gratitude and a soul moved by faith that we have the immense honor of inviting you to the celebration of our sacred union.
         </p>
         <p style="margin:14px 0 0;font-size:15px;color:#cccccc;line-height:1.8;">
-          This wedding is not merely an event — it is a <em>prophetic encounter</em>, ordained by God, sealed in eternity, and celebrated with grandeur before our family, our friends and our beloved ones.
+          This wedding is not merely an event, it is a <em>prophetic encounter</em>, ordained by God, sealed in eternity, and celebrated with grandeur before our family, our friends and our beloved ones.
         </p>
         <p style="margin:14px 0 0;font-size:15px;color:#cccccc;line-height:1.8;">
           <strong style="color:#ffffff;">RSVP:</strong> Please confirm your attendance via our official website:<br>
           <a href="https://powerfulweddingoftheuniverse.netlify.app/" style="color:${gold};text-decoration:none;">https://powerfulweddingoftheuniverse.netlify.app/</a>
         </p>
         <p style="margin:14px 0 0;font-size:14px;color:#cccccc;line-height:1.7;">
-          <strong style="color:#ffffff;">Dress Code:</strong> Elegant formal ceremony attire — African or European.
+          <strong style="color:#ffffff;">Dress Code:</strong> Elegant formal ceremony attire, African or European.
         </p>
       </td></tr>
 

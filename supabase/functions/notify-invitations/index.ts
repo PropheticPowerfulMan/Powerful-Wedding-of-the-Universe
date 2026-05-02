@@ -125,6 +125,21 @@ const parseEmailList = (raw?: string, fallback: string[] = []): string[] => {
 const resolveTemplate = (template: string, vars: Record<string, string>) =>
   template.replace(/\{(\w+)\}/g, (_, key: string) => vars[key] ?? '');
 
+const escapeHtml = (value: string): string =>
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+const paragraphsToHtml = (text: string): string =>
+  text
+    .split(/\n{2,}/)
+    .map((paragraph) => escapeHtml(paragraph).replace(/\n/g, '<br>'))
+    .map((paragraph) => `<p style="margin:0 0 16px;font-size:15px;color:#d7dce8;line-height:1.7;">${paragraph}</p>`)
+    .join('');
+
 const isUuid = (value: string): boolean =>
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
 
@@ -187,6 +202,12 @@ Deno.serve(async (req) => {
     const hostEmailRecipients = configuredRecipients.length > 0 ? configuredRecipients : fallbackRecipients;
     const invitationSiteUrl =
       Deno.env.get('INVITATION_SITE_URL') ?? 'https://powerfulweddingoftheuniverse.netlify.app/';
+    const emailAssetBaseUrl = (
+      Deno.env.get('EMAIL_ASSET_BASE_URL') ??
+      Deno.env.get('PUBLIC_SITE_URL') ??
+      invitationSiteUrl
+    ).replace(/\/$/, '');
+    const jmImageUrl = `${emailAssetBaseUrl}/JM.jpeg`;
 
     const africastalkingApiKey = Deno.env.get('AFRICASTALKING_API_KEY');
     const africastalkingUsername = Deno.env.get('AFRICASTALKING_USERNAME') ?? 'sandbox';
@@ -207,11 +228,11 @@ Deno.serve(async (req) => {
 
     const emailSubjectTemplate =
       Deno.env.get('INVITATION_EMAIL_SUBJECT') ??
-      'Official Invitation - Download your card and confirm attendance (Jonathan & Maria)';
+      'Official Invitation, Download your card and confirm attendance (Jonathan & Maria)';
 
     const emailBodyTemplate =
       Deno.env.get('INVITATION_EMAIL_BODY') ??
-      'Hello {invitation_label},\n\nWe are delighted to confirm your official invitation to the wedding of Jonathan & Maria.\n\nIMPORTANT: everything happens on this single website: {site_url}\n\nSteps to follow:\n1) Open the website: {site_url}\n2) Download your digital invitation from the invitation section\n3) Confirm your attendance (RSVP) on the same website\n\nUseful information:\n- Invitation download is done on this website\n- Attendance confirmation (RSVP) is done on this website\n- If your plan changes, update your RSVP on this website\n\nIf you experience any issue, simply reply to this email.\n\nWarmly,\nJonathan & Maria\nOfficial website: {site_url}';
+      'Hello {invitation_label},\n\nWe are delighted to confirm your official invitation to the wedding of Jonathan & Maria.\n\nIMPORTANT: everything happens on this single website: {site_url}\n\nSteps to follow:\n1) Open the website: {site_url}\n2) Download your digital invitation from the invitation section\n3) Confirm your attendance (RSVP) on the same website\n\nUseful information:\n, Invitation download is done on this website\n, Attendance confirmation (RSVP) is done on this website\n, If your plan changes, update your RSVP on this website\n\nIf you experience any issue, simply reply to this email.\n\nWarmly,\nJonathan & Maria\nOfficial website: {site_url}';
 
     const smsBodyTemplate =
       Deno.env.get('INVITATION_SMS_BODY') ??
@@ -282,7 +303,58 @@ Deno.serve(async (req) => {
 
     const resendSandboxMode = /onboarding@resend\.dev/i.test(resendFromEmail);
 
-    const sendEmail = async (to: string, subject: string, text: string, bcc: string[] = []): Promise<string | null> => {
+    const buildInvitationEmailHtml = (invitationLabel: string, bodyText: string): string => {
+      const safeLabel = escapeHtml(invitationLabel);
+      const safeSiteUrl = escapeHtml(invitationSiteUrl);
+      const safeImageUrl = escapeHtml(jmImageUrl);
+      const bodyHtml = paragraphsToHtml(bodyText);
+
+      return `<!DOCTYPE html>
+<html lang="fr">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Invitation officielle, Jonathan &amp; Maria</title></head>
+<body style="margin:0;padding:0;background:#060E1C;font-family:Georgia,'Times New Roman',serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background:#060E1C;padding:28px 12px;">
+    <tr><td align="center">
+      <table width="640" cellpadding="0" cellspacing="0" role="presentation" style="max-width:640px;width:100%;background:#0A1628;border:1px solid #D4AF37;border-radius:12px;overflow:hidden;">
+        <tr>
+          <td align="center" style="background:#060E1C;padding:30px 24px 10px;">
+            <img src="${safeImageUrl}" alt="Jonathan et Maria" width="180" height="180" style="display:block;width:180px;height:180px;border-radius:50%;border:2px solid #D4AF37;object-fit:cover;box-shadow:0 0 24px rgba(212,175,55,0.35);">
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:28px 32px 22px;background:linear-gradient(135deg,#0A1628 0%,#1A2A4A 100%);border-bottom:1px solid rgba(212,175,55,0.35);">
+            <p style="margin:0 0 8px;font-family:Arial,sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#D4AF37;">Official Wedding Invitation</p>
+            <h1 style="margin:0;font-size:28px;line-height:1.25;font-weight:normal;color:#ffffff;">Jonathan Lokala, Lomboto</h1>
+            <p style="margin:6px 0;font-size:18px;color:#ffffff;">&amp;</p>
+            <h2 style="margin:0;font-size:24px;line-height:1.25;font-weight:normal;color:#D4AF37;">Maria Nzitusu, Mvibudulu</h2>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:30px 34px 8px;">
+            <p style="margin:0 0 18px;font-size:18px;color:#ffffff;"><strong>${safeLabel}</strong></p>
+            ${bodyHtml}
+          </td>
+        </tr>
+        <tr>
+          <td align="center" style="padding:12px 34px 34px;">
+            <a href="${safeSiteUrl}" style="display:inline-block;background:#D4AF37;color:#060E1C;text-decoration:none;font-family:Arial,sans-serif;font-size:13px;font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;padding:14px 22px;border-radius:8px;">Ouvrir l'invitation</a>
+            <p style="margin:18px 0 0;font-family:Arial,sans-serif;font-size:12px;color:#7f8798;">${safeSiteUrl}</p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+    };
+
+    const sendEmail = async (
+      to: string,
+      subject: string,
+      text: string,
+      bcc: string[] = [],
+      html?: string
+    ): Promise<string | null> => {
       if (!resendApiKey) return 'RESEND_API_KEY missing';
       if (!isValidEmail(to)) return `Invalid email (${to})`;
 
@@ -302,6 +374,7 @@ Deno.serve(async (req) => {
           ...(safeBcc.length > 0 ? { bcc: safeBcc } : {}),
           subject,
           text,
+          ...(html ? { html } : {}),
         }),
       });
 
@@ -812,7 +885,8 @@ Deno.serve(async (req) => {
           if (!dryRun) {
             const subject = resolveTemplate(emailSubjectTemplate, vars);
             const text = resolveTemplate(emailBodyTemplate, vars);
-            const err = await sendEmail(guestEmail, subject, text, hostEmailRecipients);
+            const html = buildInvitationEmailHtml(invitationLabel, text);
+            const err = await sendEmail(guestEmail, subject, text, hostEmailRecipients, html);
             if (err) {
               summary.email.failed += 1;
               detail.email.status = 'failed';

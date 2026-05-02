@@ -2683,7 +2683,7 @@ export default function Admin() {
 
               {dispatchLogs.length === 0 && sessionLogs.length > 0 && !dispatchLogsLoading && (
                 <div className="mb-3 rounded-lg px-4 py-2 border border-amber-500/30 bg-amber-900/15 text-amber-300/80 font-cormorant text-xs">
-                  Données de session (non persistées en base). Les fonctions Edge n'ont pas encore été redéployées avec le code de journalisation — actualisez après redéploiement pour voir les logs persistants.
+                  Données de session (non persistées en base). Les fonctions Edge n'ont pas encore été redéployées avec le code de journalisation, actualisez après redéploiement pour voir les logs persistants.
                 </div>
               )}
 
@@ -2791,13 +2791,13 @@ export default function Admin() {
                             </td>
                             <td className="px-4 py-3 font-cormorant text-white/80 text-sm">
                               <p>{item.guest_name || recipientTypeLabel(item.recipient_type)}</p>
-                              <p className="text-white/45 text-xs break-all">{item.target || '-'}</p>
+                              <p className="text-white/45 text-xs break-all">{item.target || ','}</p>
                               {item.provider_message_id && <p className="text-white/35 text-xs break-all">ID fournisseur: {item.provider_message_id}</p>}
                               {item.provider_status && <p className="text-white/35 text-xs break-all">Statut fournisseur: {item.provider_status}</p>}
                               {item.delivered_at && <p className="text-green-300/70 text-xs break-all">Livré le: {new Date(item.delivered_at).toLocaleString('fr-FR')}</p>}
                             </td>
                             <td className="px-4 py-3 font-cormorant text-red-300/80 text-xs max-w-[280px] break-words">
-                              {item.error_message || item.provider_status_detail || '-'}
+                              {item.error_message || item.provider_status_detail || ','}
                             </td>
                           </tr>
                         ))}
@@ -3303,7 +3303,7 @@ export default function Admin() {
                                     <span className={`inline-block px-2 py-0.5 rounded border text-xs font-cormorant uppercase ${statusClasses(item.sms.status)}`}>
                                       {statusLabel(item.sms.status, 'sms')}
                                     </span>
-                                    <p className="font-cormorant text-white/45 text-xs mt-1 break-all">{item.sms.target || '-'}</p>
+                                    <p className="font-cormorant text-white/45 text-xs mt-1 break-all">{item.sms.target || ','}</p>
                                     {item.sms.reason && <p className="font-cormorant text-red-300/80 text-xs mt-1">{item.sms.reason}</p>}
                                   </div>
                                 ) : (
@@ -3316,7 +3316,7 @@ export default function Admin() {
                                     <span className={`inline-block px-2 py-0.5 rounded border text-xs font-cormorant uppercase ${statusClasses(item.email.status)}`}>
                                       {statusLabel(item.email.status, 'email')}
                                     </span>
-                                    <p className="font-cormorant text-white/45 text-xs mt-1 break-all">{item.email.target || '-'}</p>
+                                    <p className="font-cormorant text-white/45 text-xs mt-1 break-all">{item.email.target || ','}</p>
                                     {item.email.reason && <p className="font-cormorant text-red-300/80 text-xs mt-1">{item.email.reason}</p>}
                                   </div>
                                 ) : (
@@ -3431,7 +3431,7 @@ export default function Admin() {
                                     <span className={`inline-block px-2 py-0.5 rounded border text-xs font-cormorant uppercase ${statusClasses(item.whatsapp.status)}`}>
                                       {statusLabel(item.whatsapp.status, 'whatsapp')}
                                     </span>
-                                    <p className="font-cormorant text-white/45 text-xs mt-1 break-all">{item.whatsapp.target || '-'}</p>
+                                    <p className="font-cormorant text-white/45 text-xs mt-1 break-all">{item.whatsapp.target || ','}</p>
                                     {item.whatsapp.reason && <p className="font-cormorant text-red-300/80 text-xs mt-1">{item.whatsapp.reason}</p>}
                                   </div>
                                 ) : (
@@ -3444,7 +3444,7 @@ export default function Admin() {
                                     <span className={`inline-block px-2 py-0.5 rounded border text-xs font-cormorant uppercase ${statusClasses(item.email.status)}`}>
                                       {statusLabel(item.email.status, 'email')}
                                     </span>
-                                    <p className="font-cormorant text-white/45 text-xs mt-1 break-all">{item.email.target || '-'}</p>
+                                    <p className="font-cormorant text-white/45 text-xs mt-1 break-all">{item.email.target || ','}</p>
                                     {item.email.reason && <p className="font-cormorant text-red-300/80 text-xs mt-1">{item.email.reason}</p>}
                                   </div>
                                 ) : (

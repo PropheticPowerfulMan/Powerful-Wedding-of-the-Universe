@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, X, Crown } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { scrollToSection } from '../utils/scrollToSection';
@@ -8,6 +8,7 @@ const navHrefs = ['#story', '#vision', '#events', '#gallery', '#rsvp', '#invitat
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
   const { lang, setLang, t } = useLanguage();
 
   const navLabels = [
@@ -26,6 +27,18 @@ export default function Navigation() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+
+    const closeOnOutsideClick = (event: PointerEvent) => {
+      if (navRef.current?.contains(event.target as Node)) return;
+      setOpen(false);
+    };
+
+    document.addEventListener('pointerdown', closeOnOutsideClick);
+    return () => document.removeEventListener('pointerdown', closeOnOutsideClick);
+  }, [open]);
+
   const handleNav = (href: string) => {
     setOpen(false);
     window.requestAnimationFrame(() => scrollToSection(href));
@@ -35,6 +48,7 @@ export default function Navigation() {
 
   return (
     <nav
+      ref={navRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled ? 'bg-black/90 backdrop-blur-xl border-b border-gold/20 py-3' : 'bg-transparent py-5'
       }`}

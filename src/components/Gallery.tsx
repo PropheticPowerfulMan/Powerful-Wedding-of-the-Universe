@@ -92,7 +92,7 @@ export default function Gallery() {
             <div className="h-px w-20 bg-gradient-to-l from-transparent to-gold/50" />
           </div>
           <p className="font-cormorant text-white/40 text-base italic">
-            {t.gallery.eyebrow} · 2022–2026
+            {t.gallery.eyebrow} · 2022, 2026
           </p>
         </div>
 

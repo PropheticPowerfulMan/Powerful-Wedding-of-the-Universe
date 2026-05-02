@@ -366,7 +366,7 @@ Deno.serve(async (req) => {
 
       const guestEmailErr = await sendEmail(
         guestEmailTarget,
-        'Confirmation RSVP reçue — Jonathan & Maria',
+        'Confirmation RSVP reçue, Jonathan & Maria',
         guestEmailBody
       );
       if (guestEmailErr) {

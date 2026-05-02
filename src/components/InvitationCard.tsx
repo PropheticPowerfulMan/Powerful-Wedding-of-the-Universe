@@ -158,10 +158,10 @@ const handlePrint = async () => {
             </p>
 
             <h2 className="font-cinzel text-2xl md:text-4xl font-bold text-white mb-1">
-              Jonathan Lokala - Lomboto
+              Jonathan Lokala, Lomboto
             </h2>
             <p className="font-cormorant text-gold text-xl mb-1">&</p>
-            <h2 className="font-cinzel text-2xl md:text-4xl font-bold text-white mb-6">Maria Nzitusu - Mvibudulu</h2>
+            <h2 className="font-cinzel text-2xl md:text-4xl font-bold text-white mb-6">Maria Nzitusu, Mvibudulu</h2>
 
             <div className="h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent mb-6" />
 
@@ -208,7 +208,7 @@ const handlePrint = async () => {
                 "{inv.cardVerse}"
               </p>
               <cite className="font-cormorant text-gold/50 text-xs tracking-widest not-italic">
-                — {inv.cardVerseRef}
+                {inv.cardVerseRef}
               </cite>
             </blockquote>
 
@@ -219,7 +219,7 @@ const handlePrint = async () => {
             </div>
 
             <div className="border-t border-gold/20 pt-5">
-              <p className="font-cinzel text-gold text-sm font-bold">Jonathan Lokala - Lomboto</p>
+              <p className="font-cinzel text-gold text-sm font-bold">Jonathan Lokala, Lomboto</p>
               <p className="font-cormorant text-white/45 text-xs tracking-widest italic mt-0.5">
                 {inv.cardSubtitle}
               </p>

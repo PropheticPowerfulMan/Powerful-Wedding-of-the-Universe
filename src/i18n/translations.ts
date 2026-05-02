@@ -40,7 +40,7 @@ const translations = {
         },
       ],
       verse: '"Therefore what God has joined together, let no one separate."',
-      verseRef: '— Matthew 19:6',
+      verseRef: ', Matthew 19:6',
     },
     countdown: {
       days: 'Days',
@@ -68,7 +68,7 @@ const translations = {
           year: '2024',
           title: 'A Covenant Formed, the Engagement',
           description:
-            'On June 29th, Jonathan, the Powerful Teacher — a man of vision, faith, and excellence — made his intentions known. Maria, embodyment of grace and radiant purpose, said yes. Their families rejoiced. Heaven celebrated in a ceremony of pre-dowry.',
+            'On June 29th, Jonathan, the Powerful Teacher, a man of vision, faith, and excellence, made his intentions known. Maria, embodyment of grace and radiant purpose, said yes. Their families rejoiced. Heaven celebrated in a ceremony of pre-dowry.',
         },
         {
           year: '2025',
@@ -80,7 +80,7 @@ const translations = {
           year: '2026',
           title: 'The Wedding',
           description:
-            'On June 26, 2026, before God, family, and beloved friends, Jonathan Lokala - Lomboto and Maria Nzitusu Mvibudulu will exchange their vows. Two destinies united. One powerful legacy begins.',
+            'On June 26, 2026, before God, family, and beloved friends, Jonathan Lokala, Lomboto and Maria Nzitusu Mvibudulu will exchange their vows. Two destinies united. One powerful legacy begins.',
         },
       ],
     },
@@ -99,7 +99,7 @@ const translations = {
         {
           title: 'Purpose',
           description:
-            'Jonathan, the Powerful Teacher, and Maria — a woman of rare elegance and divine strength — share a divine calling. Together they are committed to excellence, education, and making a lasting impact on every life they touch.',
+            'Jonathan, the Powerful Teacher, and Maria, a woman of rare elegance and divine strength, share a divine calling. Together they are committed to excellence, education, and making a lasting impact on every life they touch.',
         },
         {
           title: 'Legacy',
@@ -162,7 +162,7 @@ const translations = {
         {
           year: '2022',
           title: 'A Divine Encounter',
-          description: 'November 18th - Two souls meet in Kinshasa',
+          description: 'November 18th, Two souls meet in Kinshasa',
           images: [
             { alt: 'First meeting moment', title: 'A Divine Encounter' },
             { alt: 'Kinshasa city moments', title: 'In the Heart of Kinshasa' },
@@ -182,7 +182,7 @@ const translations = {
         {
           year: '2024',
           title: 'A Covenant Formed',
-          description: 'June 29th - The Engagement',
+          description: 'June 29th, The Engagement',
           images: [
             { alt: 'Engagement rings and symbols', title: 'Sacred Covenant' },
             { alt: 'Engagement celebration', title: 'A Promise Made' },
@@ -192,7 +192,7 @@ const translations = {
         {
           year: '2025',
           title: 'Dowry Presentation',
-          description: 'October 25th - Traditional Union',
+          description: 'October 25th, Traditional Union',
           images: [
             { alt: 'Dowry ceremony tradition', title: 'Tradition & Honor' },
             { alt: 'Family gathering ceremony', title: 'Forever United' },
@@ -202,7 +202,7 @@ const translations = {
         {
           year: '2026',
           title: 'The Wedding',
-          description: 'June 26th - The Grand Celebration',
+          description: 'June 26th, The Grand Celebration',
           images: [
             { alt: 'Wedding day elegance', title: 'Two Hearts, One Destiny' },
             { alt: 'Powerful celebration', title: 'A Powerful Union' },
@@ -215,11 +215,11 @@ const translations = {
       eyebrow: 'Words from the Groom',
       title: 'A Personal Message',
       paragraphs: [
-        'To each of you who will witness this moment — this is not simply a wedding. This is a declaration. A declaration that God is faithful, that purpose matters, and that love, when rooted in faith, is truly unstoppable.',
+        'To each of you who will witness this moment, this is not simply a wedding. This is a declaration. A declaration that God is faithful, that purpose matters, and that love, when rooted in faith, is truly unstoppable.',
         "Maria and I have walked separate paths, each shaped by God's hand, until the day He made those paths one. I am a teacher. I am a builder. I am a believer. And today, I am also a husband-to-be deeply honored to stand before God and our people to make this covenant.",
         'Together, we will build. We will teach. We will lead. We will love. And we will do it all',
         'Your presence, your love, and your blessings on this day are a treasure we will carry for a lifetime. Thank you for being part of our story.',
-        '"He who finds a wife finds a good thing and obtains favor from the Lord." — Proverbs 18:22.',
+        '"He who finds a wife finds a good thing and obtains favor from the Lord.", Proverbs 18:22.',
       ],
       powerfully: 'Powerfully',
       subtitle: '"First Born" · The Powerful Teacher.',
@@ -280,7 +280,7 @@ const translations = {
         { event: 'Reception Celebration', date: 'June 26, 2026', detail: 'Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema', time: 'Night by 9:00 PM' },
       ],
       cardVerse: '"Therefore what God has joined together, let no one separate."',
-      cardVerseRef: '— Matthew 19:6',
+      cardVerseRef: ', Matthew 19:6',
       cardSubtitle: '"First Born" · The Powerful Teacher.',
       download: 'Download My Invitation',
       closeLabel: 'Close invitation',
@@ -289,7 +289,7 @@ const translations = {
       tagline: '"A Powerful Covenant of Love"',
       madeWith: 'Made with',
       madeIn: 'in Kinshasa, DR Congo',
-      verse: '"Therefore what God has joined together, let no one separate." — Matthew 19:6',
+      verse: '"Therefore what God has joined together, let no one separate.", Matthew 19:6',
     },
   },
 
@@ -332,7 +332,7 @@ const translations = {
         },
       ],
       verse: '« Ce que Dieu a uni, que l\'homme ne le sépare pas. »',
-      verseRef: '— Matthieu 19:6',
+      verseRef: ', Matthieu 19:6',
     },
     countdown: {
       days: 'Jours',
@@ -360,7 +360,7 @@ const translations = {
           year: '2024',
           title: 'Une Alliance Scellée, les Fiançailles',
           description:
-            'Le 29 juin, Jonathan, l\'Enseignant Puissant — un homme de vision, de foi et d\'excellence — a déclaré ses intentions. Maria, incarnation de la grâce et de la beauté divine, a dit oui. Leurs familles ont réjoui. Le ciel a célébré lors d\'une cérémonie de pré-dot.',
+            'Le 29 juin, Jonathan, l\'Enseignant Puissant, un homme de vision, de foi et d\'excellence, a déclaré ses intentions. Maria, incarnation de la grâce et de la beauté divine, a dit oui. Leurs familles ont réjoui. Le ciel a célébré lors d\'une cérémonie de pré-dot.',
         },
         {
           year: '2025',
@@ -372,7 +372,7 @@ const translations = {
           year: '2026',
           title: 'Le Mariage',
           description:
-            'Le 26 juin 2026, devant Dieu, la famille et leurs chers amis, Jonathan Lokala - Lomboto et Maria Nzitusu Mvibudulu échangeront leurs vœux. Deux destins unis. Un héritage puissant commence.',
+            'Le 26 juin 2026, devant Dieu, la famille et leurs chers amis, Jonathan Lokala, Lomboto et Maria Nzitusu Mvibudulu échangeront leurs vœux. Deux destins unis. Un héritage puissant commence.',
         },
       ],
     },
@@ -391,7 +391,7 @@ const translations = {
         {
           title: 'Vocation',
           description:
-            'Jonathan, l\'Enseignant Puissant, et Maria — une femme d\'une élégance rare et d\'une force divine — partagent un appel divin. Ensemble, ils s\'engagent pour l\'excellence, l\'éducation et un impact durable sur chaque vie qu\'ils touchent.',
+            'Jonathan, l\'Enseignant Puissant, et Maria, une femme d\'une élégance rare et d\'une force divine, partagent un appel divin. Ensemble, ils s\'engagent pour l\'excellence, l\'éducation et un impact durable sur chaque vie qu\'ils touchent.',
         },
         {
           title: 'Héritage',
@@ -454,7 +454,7 @@ const translations = {
         {
           year: '2022',
           title: 'Une Rencontre Divine',
-          description: '18 novembre — Deux âmes se rencontrent à Kinshasa',
+          description: '18 novembre, Deux âmes se rencontrent à Kinshasa',
           images: [
             { alt: 'Premier moment de rencontre', title: 'Une Rencontre Divine' },
             { alt: 'Moments à Kinshasa', title: 'Au Cœur de Kinshasa' },
@@ -474,7 +474,7 @@ const translations = {
         {
           year: '2024',
           title: 'Une Alliance Scellée',
-          description: '29 juin — Les Fiançailles',
+          description: '29 juin, Les Fiançailles',
           images: [
             { alt: 'Symboles de fiançailles', title: 'Alliance Sacrée' },
             { alt: 'Célébration des fiançailles', title: 'Une Promesse Faite' },
@@ -484,7 +484,7 @@ const translations = {
         {
           year: '2025',
           title: 'Présentation de la Dot',
-          description: '25 octobre — Union Traditionnelle',
+          description: '25 octobre, Union Traditionnelle',
           images: [
             { alt: 'Tradition de la dot', title: 'Tradition & Honneur' },
             { alt: 'Cérémonie familiale', title: 'Unis pour Toujours' },
@@ -494,7 +494,7 @@ const translations = {
         {
           year: '2026',
           title: 'Le Mariage',
-          description: '26 juin — La Grande Célébration',
+          description: '26 juin, La Grande Célébration',
           images: [
             { alt: 'Élégance du jour J', title: 'Deux Cœurs, Un Destin' },
             { alt: 'Célébration puissante', title: 'Une Union Puissante' },
@@ -507,11 +507,11 @@ const translations = {
       eyebrow: 'Mots du Marié',
       title: 'Un Message Personnel',
       paragraphs: [
-        'À chacun d\'entre vous qui témoignera de ce moment — ce n\'est pas simplement un mariage. C\'est une déclaration. Une déclaration que Dieu est fidèle, que la vocation compte, et que l\'amour, enraciné dans la foi, est véritablement irrésistible.',
+        'À chacun d\'entre vous qui témoignera de ce moment, ce n\'est pas simplement un mariage. C\'est une déclaration. Une déclaration que Dieu est fidèle, que la vocation compte, et que l\'amour, enraciné dans la foi, est véritablement irrésistible.',
         'Maria et moi avons cheminé séparément, chacun façonné par la main de Dieu, jusqu\'au jour où Il a réuni nos chemins. Je suis un enseignant. Je suis un bâtisseur. Je suis un croyant. Et aujourd\'hui, je suis aussi un futur époux profondément honoré de me tenir devant Dieu et notre peuple pour sceller cette alliance.',
         'Ensemble, nous bâtirons. Nous enseignerons. Nous dirigerons. Nous aimerons. Et nous le ferons',
         'Votre présence, votre amour et vos bénédictions en ce jour sont un trésor que nous porterons toute notre vie. Merci de faire partie de notre histoire.',
-        '« Celui qui trouve une femme trouve le bonheur et obtient la faveur de l\'Éternel. » — Proverbes 18:22.',
+        '« Celui qui trouve une femme trouve le bonheur et obtient la faveur de l\'Éternel. », Proverbes 18:22.',
       ],
       powerfully: 'Puissamment',
       subtitle: '« Premier-Né » · L\'Enseignant Puissant.',
@@ -572,7 +572,7 @@ const translations = {
         { event: 'Réception & Célébration', date: '26 juin 2026', detail: 'Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema', time: 'Nuit à 21h00' },
       ],
       cardVerse: '« Ce que Dieu a uni, que l\'homme ne le sépare pas. »',
-      cardVerseRef: '— Matthieu 19:6',
+      cardVerseRef: ', Matthieu 19:6',
       cardSubtitle: '« Premier-Né » · L\'Enseignant Puissant.',
       download: 'Télécharger Mon Invitation',
       closeLabel: 'Fermer l\'invitation',
@@ -581,7 +581,7 @@ const translations = {
       tagline: '« Une Alliance Puissante d\'Amour »',
       madeWith: 'Fait avec',
       madeIn: 'à Kinshasa, RD Congo',
-      verse: '« Ce que Dieu a uni, que l\'homme ne le sépare pas. » — Matthieu 19:6',
+      verse: '« Ce que Dieu a uni, que l\'homme ne le sépare pas. », Matthieu 19:6',
     },
   },
 } as const;

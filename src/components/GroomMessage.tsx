@@ -77,7 +77,7 @@ export default function GroomMessage() {
                 <span className="font-cinzel text-gold text-lg font-bold">JL</span>
               </div>
               <div>
-                <p className="font-cinzel text-gold text-base font-bold">Jonathan Lokala - Lomboto</p>
+                <p className="font-cinzel text-gold text-base font-bold">Jonathan Lokala, Lomboto</p>
                 <p className="font-cormorant text-white/45 text-sm tracking-wider italic">
                   {g.subtitle}
                 </p>
