@@ -264,7 +264,7 @@ const translations = {
       verifying: 'Verifying...',
       hint: 'Your invitation is uniquely crafted for you. Names are case-insensitive.',
       // Card texts
-      cardCelebration: 'The Wedding Celebration',
+      cardCelebration: 'Religious Wedding & Nuptial Blessing',
       cardInvited: 'You are',
       cardInvitedHighlight: 'POWERFULLY',
       cardInvitedSuffix: 'invited to celebrate the union of',
@@ -272,7 +272,7 @@ const translations = {
       cardCouple: 'This invitation covers your household as a couple.',
       cardHonor:
         'It is our great honor to welcome you to this sacred and powerful moment of our lives. Your presence will make this celebration complete.',
-      cardSchedule: 'Wedding Schedule',
+      cardSchedule: 'Religious Ceremony',
       cardScheduleItems: [
         { event: 'Civil Wedding', date: 'May 29, 2026', detail: 'Commune de Ngaliema · Kinshasa, DR Congo', time: 'Morning by 9:00 AM' },
         { event: 'Traditional Wedding', date: 'June 26, 2026', detail: "Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema, Ref: Tunel juste après la parcelle de l'Apôtre MUTOMBO KALOMBO.", time: 'Morning by 09:00 AM' },

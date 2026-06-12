@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Download, X, Crown, Star } from 'lucide-react';
+import { AlertCircle, CheckCircle, Crown, Download, Loader2, Star, X } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import { supabase } from '../lib/supabase';
 import type { Guest } from '../types';
@@ -11,18 +11,107 @@ interface Props {
 }
 
 export default function InvitationCard({ guest, onClose }: Props) {
-  const { t } = useLanguage();
+  const { lang, t } = useLanguage();
   const inv = t.invitation;
   const cardRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [downloadDialog, setDownloadDialog] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [confetti, setConfetti] = useState<{ x: number; y: number; color: string; size: number; angle: number }[]>([]);
 
   const guestName = [guest.first_name, guest.post_name, guest.last_name].filter(Boolean).join(' ');
   const invitationRecipient = guest.is_couple ? `Mr. ${guestName} and spouse` : guestName;
+  const ceremonyLabels = {
+    celebration: lang === 'fr' ? 'Mariage Religieux & Bénédiction Nuptiale' : 'Religious Wedding & Nuptial Blessing',
+    schedule: lang === 'fr' ? 'Cérémonie Religieuse' : 'Religious Ceremony',
+    event: lang === 'fr' ? 'Mariage Religieux & Bénédiction Nuptiale' : 'Religious Wedding & Nuptial Blessing',
+    downloading: lang === 'fr' ? 'Préparation...' : 'Preparing...',
+    success: lang === 'fr'
+      ? 'Votre invitation est prête et a été téléchargée.'
+      : 'Your invitation is ready and has been downloaded.',
+    error: lang === 'fr'
+      ? "Le téléchargement n'a pas pu aboutir. Veuillez réessayer."
+      : 'The download could not be completed. Please try again.',
+  };
+  const filteredCeremonyItems = inv.cardScheduleItems.filter((item) => (
+    item.event.toLowerCase().includes('religious') ||
+    item.event.toLowerCase().includes('religieux')
+  ));
+  const ceremonyItems = filteredCeremonyItems.length > 0 ? filteredCeremonyItems : inv.cardScheduleItems.slice(2, 3);
+
+  const isMobileOrTablet = () => (
+    window.matchMedia('(max-width: 1024px)').matches ||
+    /Android|iPhone|iPad|iPod/i.test(window.navigator.userAgent)
+  );
+
+  const safeFileName = `invitation-${guestName.replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-|-$/g, '') || 'guest'}.png`;
+
+  const triggerImageDownload = async (blob: Blob, filename: string) => {
+    const file = new File([blob], filename, { type: 'image/png' });
+
+    if (isMobileOrTablet() && navigator.canShare?.({ files: [file] })) {
+      try {
+        await navigator.share({
+          files: [file],
+          title: filename,
+        });
+        return;
+      } catch {
+        // Fall back to a normal browser download if native sharing is cancelled or blocked.
+      }
+    }
+
+    const objectUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = objectUrl;
+    link.download = filename;
+    link.rel = 'noopener';
+    link.style.display = 'none';
+    document.body.appendChild(link);
+    link.click();
+    window.setTimeout(() => {
+      link.remove();
+      URL.revokeObjectURL(objectUrl);
+    }, 60000);
+  };
+
+  const createInvitationBlob = async () => {
+    await document.fonts?.ready;
+    const invitationCard = cardRef.current?.querySelector('#invitation-card') as HTMLElement | null;
+    if (!invitationCard) throw new Error('Invitation card is not available');
+
+    const canvas = await html2canvas(invitationCard, {
+      backgroundColor: '#060E1C',
+      scale: Math.min(window.devicePixelRatio || 1, 2) * 3,
+      useCORS: true,
+      allowTaint: true,
+      logging: false,
+      windowWidth: Math.max(document.documentElement.clientWidth, invitationCard.scrollWidth),
+      windowHeight: Math.max(document.documentElement.clientHeight, invitationCard.scrollHeight),
+      onclone: (documentClone) => {
+        const clonedCard = documentClone.querySelector('#invitation-card') as HTMLElement | null;
+        if (!clonedCard) return;
+
+        clonedCard.style.width = '672px';
+        clonedCard.style.maxWidth = '672px';
+        clonedCard.style.transform = 'none';
+        clonedCard.style.margin = '0';
+        clonedCard.style.boxShadow = '0 0 90px rgba(212, 175, 55, 0.28)';
+      },
+    });
+
+    return await new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob((value) => {
+        if (value) resolve(value);
+        else reject(new Error('Unable to create invitation image'));
+      }, 'image/png', 1);
+    });
+  };
 
   useEffect(() => {
     setTimeout(() => setVisible(true), 50);
-    const particles = Array.from({ length: 40 }, () => ({
+    const particleCount = window.matchMedia('(max-width: 640px)').matches ? 12 : 40;
+    const particles = Array.from({ length: particleCount }, () => ({
       x: Math.random() * 100,
       y: Math.random() * 40,
       color: ['#D4AF37', '#F0C040', '#FFFFFF', '#1A3A8A', '#C5A028'][Math.floor(Math.random() * 5)],
@@ -32,49 +121,41 @@ export default function InvitationCard({ guest, onClose }: Props) {
     setConfetti(particles);
   }, []);
 
-const handlePrint = async () => {
-  const invitationCard = cardRef.current?.querySelector('#invitation-card') as HTMLElement;
-  if (!invitationCard) return;
+  const handlePrint = async () => {
+    if (isDownloading) return;
 
-  try {
-    const canvas = await html2canvas(invitationCard, {
-      backgroundColor: '#060E1C',
-      scale: 2,
-      useCORS: true,
-      logging: false,
-    });
+    setIsDownloading(true);
+    setDownloadDialog(null);
 
-    const link = document.createElement('a');
-    link.download = `invitation-${guestName.replace(/\s+/g, '-')}.png`;
-    link.href = canvas.toDataURL('image/png');
-    link.click();
+    try {
+      const blob = await createInvitationBlob();
+      await triggerImageDownload(blob, safeFileName);
+      setDownloadDialog({ type: 'success', message: ceremonyLabels.success });
 
-    // Notifier l'hôte + l'invité (si contacts disponibles) après téléchargement
-    supabase.functions.invoke('notify-download', {
-      body: {
-        guest_id: guest.id,
-        guest_name: guestName,
-        is_couple: guest.is_couple,
-        person_type: guest.person_type ?? 'family',
-        gender: guest.gender ?? 'male',
-        contact_email: guest.rsvp_contact_email || undefined,
-        contact_phone: guest.rsvp_contact_phone || (guest.phone || undefined),
-        partner_contact_phone: guest.partner_phone || undefined,
-      },
-    }).catch(() => { /* notification silencieuse, ne bloque pas le téléchargement */ });
-
-  } catch (err) {
-    console.error('Download failed', err);
-  }
-};
-
-
-
+      supabase.functions.invoke('notify-download', {
+        body: {
+          guest_id: guest.id,
+          guest_name: guestName,
+          is_couple: guest.is_couple,
+          person_type: guest.person_type ?? 'family',
+          gender: guest.gender ?? 'male',
+          contact_email: guest.rsvp_contact_email || undefined,
+          contact_phone: guest.rsvp_contact_phone || (guest.phone || undefined),
+          partner_contact_phone: guest.partner_phone || undefined,
+        },
+      }).catch(() => { /* Notification silencieuse, sans bloquer le téléchargement. */ });
+    } catch (err) {
+      console.error('Download failed', err);
+      setDownloadDialog({ type: 'error', message: ceremonyLabels.error });
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   return (
     <div
       id="invitation-modal"
-      className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-700 ${
+      className={`fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 transition-all duration-700 ${
         visible ? 'bg-black/80 backdrop-blur-sm' : 'bg-transparent'
       }`}
     >
@@ -98,7 +179,7 @@ const handlePrint = async () => {
 
       <div
         ref={cardRef}
-        className={`relative w-full max-w-2xl max-h-[90vh] overflow-y-auto transition-all duration-700 print:max-h-none print:overflow-visible ${
+        className={`relative z-10 w-full max-w-2xl max-h-[92dvh] overflow-y-auto transition-all duration-700 print:max-h-none print:overflow-visible ${
           visible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8'
         }`}
       >
@@ -148,7 +229,7 @@ const handlePrint = async () => {
             </div>
 
             <p className="font-cormorant text-gold/60 text-xs tracking-[0.4em] uppercase mb-2">
-              {inv.cardCelebration}
+              {ceremonyLabels.celebration}
             </p>
 
             <p className="font-cormorant text-white/70 text-base md:text-lg leading-relaxed mb-4">
@@ -183,18 +264,18 @@ const handlePrint = async () => {
             <div className="h-px bg-gradient-to-r from-transparent via-gold/40 to-transparent mb-6" />
 
             <p className="font-cormorant text-gold/60 text-xs tracking-[0.3em] uppercase mb-4">
-              {inv.cardSchedule}
+              {ceremonyLabels.schedule}
             </p>
             <div className="space-y-3 max-w-md mx-auto mb-8 text-left">
-              {inv.cardScheduleItems.map((item) => (
+              {ceremonyItems.map((item) => (
                 <div
                   key={item.event}
                   className="flex items-start gap-3 border border-gold/15 rounded-lg p-3 bg-white/3"
                 >
                   <div className="w-1.5 h-1.5 rounded-full bg-gold mt-1.5 flex-shrink-0" />
                   <div>
-                    <p className="font-cinzel text-white text-xs font-semibold">{item.event}</p>
-                    <p className="font-cormorant text-white/55 text-sm">{item.date} · {item.time}</p>
+                    <p className="font-cinzel text-white text-xs font-semibold">{ceremonyLabels.event}</p>
+                    <p className="font-cormorant text-white/55 text-sm">{item.date} - {item.time}</p>
                     <p className="font-cormorant text-white/40 text-xs">{item.detail}</p>
                   </div>
                 </div>
@@ -230,13 +311,56 @@ const handlePrint = async () => {
         <div className="flex justify-center mt-6 print:hidden">
           <button
             onClick={handlePrint}
-            className="flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-gold/80 to-gold hover:from-gold hover:to-amber-400 text-black font-cinzel text-sm font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+            disabled={isDownloading}
+            aria-busy={isDownloading}
+            className="flex min-h-12 items-center justify-center gap-2 px-8 py-3.5 bg-gradient-to-r from-gold/80 to-gold hover:from-gold hover:to-amber-400 text-black font-cinzel text-sm font-bold tracking-widest uppercase rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.3)] disabled:cursor-wait disabled:opacity-80"
           >
-            <Download className="w-4 h-4" />
-            {inv.download}
+            {isDownloading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                {ceremonyLabels.downloading}
+              </>
+            ) : (
+              <>
+                <Download className="w-4 h-4" />
+                {inv.download}
+              </>
+            )}
           </button>
         </div>
       </div>
+
+      {downloadDialog && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 px-4 print:hidden"
+        >
+          <div className="w-full max-w-sm rounded-xl border border-gold/30 bg-[#07101f] p-6 text-center shadow-[0_0_50px_rgba(0,0,0,0.55)]">
+            <div className={`mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full ${
+              downloadDialog.type === 'success' ? 'bg-emerald-500/15 text-emerald-300' : 'bg-red-500/15 text-red-300'
+            }`}>
+              {downloadDialog.type === 'success' ? (
+                <CheckCircle className="h-7 w-7" />
+              ) : (
+                <AlertCircle className="h-7 w-7" />
+              )}
+            </div>
+            <p className={`font-cormorant text-lg font-semibold leading-relaxed ${
+              downloadDialog.type === 'success' ? 'text-emerald-300' : 'text-red-200'
+            }`}>
+              {downloadDialog.message}
+            </p>
+            <button
+              type="button"
+              onClick={() => setDownloadDialog(null)}
+              className="mt-5 min-h-11 rounded-lg bg-gold px-6 font-cinzel text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-amber-300"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
