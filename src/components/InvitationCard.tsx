@@ -22,27 +22,45 @@ export default function InvitationCard({ guest, onClose }: Props) {
   const guestName = [guest.first_name, guest.post_name, guest.last_name].filter(Boolean).join(' ');
   const invitationRecipient = guest.is_couple ? `Mr. ${guestName} and spouse` : guestName;
   const ceremonyLabels = {
-    celebration: lang === 'fr' ? 'Mariage Religieux & Bénédiction Nuptiale' : 'Religious Wedding & Nuptial Blessing',
-    schedule: lang === 'fr' ? 'Cérémonie Religieuse' : 'Religious Ceremony',
-    event: lang === 'fr' ? 'Mariage Religieux & Bénédiction Nuptiale' : 'Religious Wedding & Nuptial Blessing',
-    downloading: lang === 'fr' ? 'Préparation...' : 'Preparing...',
+    celebration: lang === 'fr' ? 'Mariage religieux et b\u00e9n\u00e9diction nuptiale' : 'Religious wedding and nuptial blessing',
+    schedule: lang === 'fr' ? 'Programme de l\'invitation' : 'Invitation program',
+    downloading: lang === 'fr' ? 'Pr\u00e9paration...' : 'Preparing...',
     success: lang === 'fr'
-      ? 'Votre invitation est prête et a été téléchargée.'
+      ? 'Votre invitation est pr\u00eate et a \u00e9t\u00e9 t\u00e9l\u00e9charg\u00e9e.'
       : 'Your invitation is ready and has been downloaded.',
     error: lang === 'fr'
-      ? "Le téléchargement n'a pas pu aboutir. Veuillez réessayer."
+      ? "Le t\u00e9l\u00e9chargement n'a pas pu aboutir. Veuillez r\u00e9essayer."
       : 'The download could not be completed. Please try again.',
   };
-  const filteredCeremonyItems = inv.cardScheduleItems.filter((item) => {
-    const searchableText = `${item.event} ${item.detail}`.toLowerCase();
-    return (
-      searchableText.includes('religious') ||
-      searchableText.includes('religieux') ||
-      searchableText.includes('blessing') ||
-      searchableText.includes('bénédiction')
-    );
-  });
-  const ceremonyItems = filteredCeremonyItems.length > 0 ? filteredCeremonyItems : inv.cardScheduleItems.slice(2, 3);
+  const ceremonyItems = lang === 'fr'
+    ? [
+        {
+          event: 'Mariage religieux et b\u00e9n\u00e9diction nuptiale',
+          date: '26 juin 2026',
+          detail: 'LES MESSAGERS CHURCH',
+          time: '16h00',
+        },
+        {
+          event: 'R\u00e9ception et c\u00e9l\u00e9bration',
+          date: '26 juin 2026',
+          detail: 'Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema',
+          time: '20h00',
+        },
+      ]
+    : [
+        {
+          event: 'Religious wedding and nuptial blessing',
+          date: 'June 26, 2026',
+          detail: 'LES MESSAGERS CHURCH',
+          time: '4:00 PM',
+        },
+        {
+          event: 'Reception and celebration',
+          date: 'June 26, 2026',
+          detail: 'Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema',
+          time: '8:00 PM',
+        },
+      ];
 
   const isMobileOrTablet = () => (
     window.matchMedia('(max-width: 1024px)').matches ||
@@ -88,7 +106,8 @@ export default function InvitationCard({ guest, onClose }: Props) {
     if (!invitationCard) throw new Error('Invitation card is not available');
 
     const { default: html2canvas } = await import('html2canvas');
-    const exportScale = isMobileOrTablet() ? 1.75 : 2;
+    const exportWidth = 1080;
+    const exportScale = 4;
 
     const canvas = await html2canvas(invitationCard, {
       backgroundColor: '#060E1C',
@@ -102,8 +121,8 @@ export default function InvitationCard({ guest, onClose }: Props) {
         const clonedCard = documentClone.querySelector('#invitation-card') as HTMLElement | null;
         if (!clonedCard) return;
 
-        clonedCard.style.width = '672px';
-        clonedCard.style.maxWidth = '672px';
+        clonedCard.style.width = `${exportWidth}px`;
+        clonedCard.style.maxWidth = `${exportWidth}px`;
         clonedCard.style.transform = 'none';
         clonedCard.style.margin = '0';
         clonedCard.style.boxShadow = '0 0 90px rgba(212, 175, 55, 0.28)';
@@ -287,7 +306,7 @@ export default function InvitationCard({ guest, onClose }: Props) {
                 >
                   <div className="w-1.5 h-1.5 rounded-full bg-gold mt-1.5 flex-shrink-0" />
                   <div>
-                    <p className="font-cinzel text-white text-xs font-semibold">{ceremonyLabels.event}</p>
+                    <p className="font-cinzel text-white text-xs font-semibold">{item.event}</p>
                     <p className="font-cormorant text-white/55 text-sm">{item.date} - {item.time}</p>
                     <p className="font-cormorant text-white/40 text-xs">{item.detail}</p>
                   </div>
