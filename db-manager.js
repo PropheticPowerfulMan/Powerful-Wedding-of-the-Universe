@@ -287,6 +287,7 @@ async function cmdSync() {
 
 // ─── Point d'entrée ───────────────────────────────────────────────────────
 const [,, command, ...args] = process.argv;
+const optionalBackup = command === 'backup' && args.includes('--optional');
 
 (async () => {
   console.log('╔══════════════════════════════════════════════╗');
@@ -327,6 +328,11 @@ EXEMPLES:
 `);
     }
   } catch (err) {
+    if (optionalBackup) {
+      console.warn(`\n⚠️  Sauvegarde optionnelle ignorée: ${err.message}`);
+      console.warn('   Le build continue normalement.\n');
+      process.exit(0);
+    }
     console.error(`\n❌ Erreur: ${err.message}\n`);
     process.exit(1);
   }

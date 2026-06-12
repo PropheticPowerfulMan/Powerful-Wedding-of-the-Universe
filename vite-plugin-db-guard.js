@@ -14,7 +14,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 function runBackup(context) {
   try {
     console.log(`\n🛡️  [DB Guard] Sauvegarde automatique (${context})...`);
-    const output = execSync('node db-manager.js backup', {
+    const output = execSync('node db-manager.js backup --optional', {
       cwd: __dirname,
       encoding: 'utf-8',
       timeout: 30000,

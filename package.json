@@ -14,7 +14,7 @@
     "db:status": "node db-manager.js status",
     "db:list": "node db-manager.js list",
     "db:restore": "node db-manager.js restore",
-    "prebuild": "node db-manager.js backup"
+    "prebuild": "node db-manager.js backup --optional"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4",

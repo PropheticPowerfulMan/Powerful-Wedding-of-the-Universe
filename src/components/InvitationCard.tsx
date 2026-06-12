@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import { AlertCircle, CheckCircle, Crown, Download, Loader2, Star, X } from 'lucide-react';
-import html2canvas from 'html2canvas';
 import { supabase } from '../lib/supabase';
 import type { Guest } from '../types';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -14,6 +13,7 @@ export default function InvitationCard({ guest, onClose }: Props) {
   const { lang, t } = useLanguage();
   const inv = t.invitation;
   const cardRef = useRef<HTMLDivElement>(null);
+  const invitationBlobRef = useRef<Blob | null>(null);
   const [visible, setVisible] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const [downloadDialog, setDownloadDialog] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
@@ -33,10 +33,15 @@ export default function InvitationCard({ guest, onClose }: Props) {
       ? "Le téléchargement n'a pas pu aboutir. Veuillez réessayer."
       : 'The download could not be completed. Please try again.',
   };
-  const filteredCeremonyItems = inv.cardScheduleItems.filter((item) => (
-    item.event.toLowerCase().includes('religious') ||
-    item.event.toLowerCase().includes('religieux')
-  ));
+  const filteredCeremonyItems = inv.cardScheduleItems.filter((item) => {
+    const searchableText = `${item.event} ${item.detail}`.toLowerCase();
+    return (
+      searchableText.includes('religious') ||
+      searchableText.includes('religieux') ||
+      searchableText.includes('blessing') ||
+      searchableText.includes('bénédiction')
+    );
+  });
   const ceremonyItems = filteredCeremonyItems.length > 0 ? filteredCeremonyItems : inv.cardScheduleItems.slice(2, 3);
 
   const isMobileOrTablet = () => (
@@ -76,13 +81,18 @@ export default function InvitationCard({ guest, onClose }: Props) {
   };
 
   const createInvitationBlob = async () => {
+    if (invitationBlobRef.current) return invitationBlobRef.current;
+
     await document.fonts?.ready;
     const invitationCard = cardRef.current?.querySelector('#invitation-card') as HTMLElement | null;
     if (!invitationCard) throw new Error('Invitation card is not available');
 
+    const { default: html2canvas } = await import('html2canvas');
+    const exportScale = isMobileOrTablet() ? 1.75 : 2;
+
     const canvas = await html2canvas(invitationCard, {
       backgroundColor: '#060E1C',
-      scale: Math.min(window.devicePixelRatio || 1, 2) * 3,
+      scale: exportScale,
       useCORS: true,
       allowTaint: true,
       logging: false,
@@ -100,12 +110,15 @@ export default function InvitationCard({ guest, onClose }: Props) {
       },
     });
 
-    return await new Promise<Blob>((resolve, reject) => {
+    const blob = await new Promise<Blob>((resolve, reject) => {
       canvas.toBlob((value) => {
         if (value) resolve(value);
         else reject(new Error('Unable to create invitation image'));
       }, 'image/png', 1);
     });
+
+    invitationBlobRef.current = blob;
+    return blob;
   };
 
   useEffect(() => {

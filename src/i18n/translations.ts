@@ -252,7 +252,7 @@ const translations = {
       eyebrow: 'Exclusively Yours',
       title: 'Your Personal Invitation',
       description:
-        "Enter your name below to access your personalized invitation to Jonathan & Maria's wedding celebration.",
+        "Enter your name below to access your personalized invitation to Jonathan & Maria's religious wedding and nuptial blessing.",
       firstName: 'First Name',
       postName: 'Post Name',
       postNameOptional: '(optional)',
@@ -274,10 +274,7 @@ const translations = {
         'It is our great honor to welcome you to this sacred and powerful moment of our lives. Your presence will make this celebration complete.',
       cardSchedule: 'Religious Ceremony',
       cardScheduleItems: [
-        { event: 'Civil Wedding', date: 'May 29, 2026', detail: 'Commune de Ngaliema · Kinshasa, DR Congo', time: 'Morning by 9:00 AM' },
-        { event: 'Traditional Wedding', date: 'June 26, 2026', detail: "Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema, Ref: Tunel juste après la parcelle de l'Apôtre MUTOMBO KALOMBO.", time: 'Morning by 09:00 AM' },
-        { event: 'Religious Wedding & Blessing', date: 'June 26, 2026', detail: "Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema, at LES MESSAGERS CHURCH.", time: 'Evening by 4:00 PM' },
-        { event: 'Reception Celebration', date: 'June 26, 2026', detail: 'Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema', time: 'Night by 9:00 PM' },
+        { event: 'Religious Wedding & Nuptial Blessing', date: 'June 26, 2026', detail: "Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema, at LES MESSAGERS CHURCH.", time: 'Evening by 4:00 PM' },
       ],
       cardVerse: '"Therefore what God has joined together, let no one separate."',
       cardVerseRef: ', Matthew 19:6',
@@ -544,7 +541,7 @@ const translations = {
       eyebrow: 'Exclusivement pour Vous',
       title: 'Votre Invitation Personnelle',
       description:
-        'Entrez votre nom ci-dessous pour accéder à votre invitation personnalisée au mariage de Jonathan & Maria.',
+        'Entrez votre nom ci-dessous pour accéder à votre invitation personnalisée au mariage religieux et à la bénédiction nuptiale de Jonathan & Maria.',
       firstName: 'Prénom',
       postName: 'Post-nom',
       postNameOptional: '(optionnel)',
@@ -556,7 +553,7 @@ const translations = {
       verifying: 'Vérification...',
       hint: 'Votre invitation est créée uniquement pour vous. Les noms ne sont pas sensibles à la casse.',
       // Textes de la carte
-      cardCelebration: 'La Célébration du Mariage',
+      cardCelebration: 'Mariage Religieux & Bénédiction Nuptiale',
       cardInvited: 'Vous êtes',
       cardInvitedHighlight: 'PUISSAMMENT',
       cardInvitedSuffix: 'invité(e) à célébrer l\'union de',
@@ -564,12 +561,9 @@ const translations = {
       cardCouple: 'Cette invitation couvre votre foyer en tant que couple.',
       cardHonor:
         'C\'est un immense honneur de vous accueillir à ce moment sacré et puissant de notre vie. Votre présence rendra cette célébration complète.',
-      cardSchedule: 'Programme du Mariage',
+      cardSchedule: 'Cérémonie Religieuse',
       cardScheduleItems: [
-        { event: 'Mariage Civil', date: '29 mai 2026', detail: 'Commune de Ngaliema · Kinshasa, RD Congo', time: 'Matin à 9h00' },
-        { event: 'Mariage Traditionnel', date: '26 juin 2026', detail: "Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema, Réf : Tunel juste après la parcelle de l'Apôtre MUTOMBO KALOMBO.", time: 'Matin à 09h00' },
-        { event: 'Mariage Religieux & Bénédiction', date: '26 juin 2026', detail: "Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema, à LES MESSAGERS CHURCH.", time: 'Soir à 16h00' },
-        { event: 'Réception & Célébration', date: '26 juin 2026', detail: 'Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema', time: 'Nuit à 21h00' },
+        { event: 'Mariage Religieux & Bénédiction Nuptiale', date: '26 juin 2026', detail: "Av. Congo ya sika n*3, Q/Pigeon C/Ngaliema, à LES MESSAGERS CHURCH.", time: 'Soir à 16h00' },
       ],
       cardVerse: '« Ce que Dieu a uni, que l\'homme ne le sépare pas. »',
       cardVerseRef: ', Matthieu 19:6',
