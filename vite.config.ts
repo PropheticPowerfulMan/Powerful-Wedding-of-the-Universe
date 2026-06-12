@@ -4,6 +4,7 @@ import dbGuard from './vite-plugin-db-guard.js';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: './',
   plugins: [react(), dbGuard()],
   optimizeDeps: {
     exclude: ['lucide-react'],
